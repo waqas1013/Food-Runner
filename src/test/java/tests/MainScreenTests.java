@@ -6,7 +6,11 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import pages.DefaultDriver;
 import pages.LocatorLoader;
 import pages.MainScreen;
@@ -27,7 +31,7 @@ public class MainScreenTests extends LocatorLoader {
     public void setUp() {
         // Set up Extent Reports with ExtentSparkReporter
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/test-output/ExtentReport.html");
-        sparkReporter.config().setDocumentTitle("Food Runner App Automation Tests Report");
+        sparkReporter.config().setDocumentTitle("Munchies App Automation Tests Report");
         sparkReporter.config().setReportName("Automation Tests Report");
 
         extent = new ExtentReports();
@@ -82,8 +86,9 @@ public class MainScreenTests extends LocatorLoader {
         }
     }
 
+    //Apply Top Rated Filter and verify correct list of restaurants are shown.
     @Test
-    public void testApplyTopRatedFilter() {
+    public void testApplyTopRatedFilterAndVerifyResults() {
         test = extent.createTest("testApplyTopRatedFilter", "Verify that the Top Rated filter can be applied and results are correct");
         try {
             test.log(Status.INFO, "Verifying if HomePage is displayed");
@@ -190,6 +195,7 @@ public class MainScreenTests extends LocatorLoader {
             throw e;  // Rethrow to ensure the test fails correctly
         }
     }
+
 
     @AfterMethod
     public void tearDown() {

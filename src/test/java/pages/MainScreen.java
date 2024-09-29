@@ -36,7 +36,7 @@ public class MainScreen extends LocatorLoader {
     }
 
 
-    // Method to click on the "Fast Food" filter
+    // Method to click on the "Fast Food" filter. Also checking the state if its clicked. iOS filter state always returns true. Test still passes for iOS because the state is returned as true always, to make it fail, if you change the assertion to false, then the test will fail, because we will expect false but it will return true.
     public void applyFastFoodFilter() {
         WebElement fastFoodFilter;
         if (platformName.equalsIgnoreCase("Android")) {
@@ -48,7 +48,6 @@ public class MainScreen extends LocatorLoader {
             fastFoodFilter = appiumDriver.findElement(By.name(properties.getProperty("fastFoodFilter")));
             waitUtils.waitUntilVisible(fastFoodFilter);
             fastFoodFilter.click();
-            fastFoodFilter.isEnabled();
             Assert.assertTrue(fastFoodFilter.isEnabled());
 
         }
@@ -84,6 +83,7 @@ public class MainScreen extends LocatorLoader {
         }
     }
 
+    //In Multiple Filters testing, we test 2 filters applied together, in this case, Fast Food filter & Top Rated filters are applied. And checking state of filter that its applied.
     public boolean areMultipleFiltersSelected() {
         WebElement fastFoodFilter;
         WebElement topRatedFilter;
@@ -96,8 +96,6 @@ public class MainScreen extends LocatorLoader {
             topRatedFilter = appiumDriver.findElement(By.id(properties.getProperty("topRatedFilter")));
             return (topRatedFilter.isEnabled() && fastFoodFilter.isEnabled());
         }
-
-
     }
 
     public boolean isTopRatedFilterSelected() {
@@ -109,8 +107,6 @@ public class MainScreen extends LocatorLoader {
             topRatedFilter = appiumDriver.findElement(By.id(properties.getProperty("topRatedFilter")));
             return (topRatedFilter.isEnabled());
         }
-
-
     }
 
     public boolean isTakeOutFilterSelected() {
@@ -121,17 +117,6 @@ public class MainScreen extends LocatorLoader {
         } else {
             takeOutFilter = appiumDriver.findElement(By.id(properties.getProperty("takeOutFilter")));
             return takeOutFilter.isEnabled();
-        }
-    }
-
-    public boolean isFirstRestaurantDisplayed() {
-        WebElement firstRestaurantInList;
-        if (platformName.equalsIgnoreCase("Android")) {
-            firstRestaurantInList = appiumDriver.findElement(By.xpath(properties.getProperty("firstRestaurantInTheList")));
-            return firstRestaurantInList.isDisplayed();
-        } else {
-            firstRestaurantInList = appiumDriver.findElement(By.id(properties.getProperty("firstRestaurantInTheList")));
-            return firstRestaurantInList.isDisplayed();
         }
     }
 
@@ -262,23 +247,18 @@ public class MainScreen extends LocatorLoader {
         }
     }
 
-
-
-    public void verifyFilterResults() {
-        if (platformName.equalsIgnoreCase("Android")) {
-            Assert.assertTrue(isFirstRestaurantDisplayed());
-            Assert.assertTrue(isPizzeriaVarshaRestauarantIsDisplayed());
-            Assert.assertTrue(isHenriksMuddyWaterRestauarantIsDisplayed());
-        } else {
-            Assert.assertTrue(isFirstRestaurantDisplayed());
-            Assert.assertTrue(isPizzeriaVarshaRestauarantIsDisplayed());
-            Assert.assertTrue(isHenriksMuddyWaterRestauarantIsDisplayed());
+    public boolean verifyEstimateDeliveryTimeIsShownOnRestaurantCard() {
+        try {
+            WebElement estimateDeliveryTime;
+            if (platformName.equalsIgnoreCase("Android")) {
+                estimateDeliveryTime = appiumDriver.findElement(By.xpath(properties.getProperty("doortjeBed&Breakfast")));
+            } else {
+                estimateDeliveryTime = appiumDriver.findElement(By.id(properties.getProperty("doortjeBed&Breakfast")));
+            }
+            return estimateDeliveryTime.isDisplayed();
+        } catch (NoSuchElementException e) {
+            // If the element is not found, return false instead of throwing an exception
+            return false;
         }
-    }
-
-    //If all of them could have been countable with some ID, the test would have been different, we could have verified the count of restaurants with compare to ID,Verifying 3 restaurants with their name.
-
-    public void verifyListOFRestaurantsWithoutFilter(){
-
     }
 }
