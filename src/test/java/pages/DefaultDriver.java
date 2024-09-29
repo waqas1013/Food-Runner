@@ -20,10 +20,8 @@ public class DefaultDriver {
     Properties properties = new Properties();
     FileHandlingUtility fileHandlingUtility = new FileHandlingUtility();
 
-
     public AppiumDriver setUp() throws InterruptedException {
 
-        System.out.println("platformName:  " + platformName);
         if (platformName == null){
             platformName = "iOS";
         }
@@ -35,7 +33,6 @@ public class DefaultDriver {
                 e.printStackTrace();
             }
         } else if (platformName.equalsIgnoreCase("iOS")) {
-            System.out.println("platformName:  " + platformName);
             try {
                 properties.load(fileHandlingUtility.getFileFromResources("iOSCommon.properties"));
             } catch (IOException e) {
@@ -60,7 +57,6 @@ public class DefaultDriver {
             }
 
         } else if (platformName.equalsIgnoreCase("iOS")) {
-            System.out.println("platformName:  " + platformName);
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.setCapability("deviceName", (properties.getProperty("deviceName")));
             caps.setCapability("platformVersion", "17.5");
@@ -79,25 +75,6 @@ public class DefaultDriver {
         }
 
         return driver;
-
-        /*String platformName = Objects.requireNonNull(options.getPlatformName()).toString();
-
-        String appiumServerURL = "http://127.0.0.1:4723/";
-
-        try {
-            if (platformName.equals("Android")) {
-                driver = new AndroidDriver(new URL(appiumServerURL), options);
-            } else {
-                driver = new IOSDriver(new URL(appiumServerURL), options);
-            }
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
-        }
-
-        //driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), options);
-
-         */
     }
 
     public void tearDown() {
