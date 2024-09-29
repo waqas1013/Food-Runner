@@ -6,11 +6,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.DefaultDriver;
 import pages.LocatorLoader;
 import pages.MainScreen;
@@ -31,7 +27,7 @@ public class MainScreenTests extends LocatorLoader {
     public void setUp() {
         // Set up Extent Reports with ExtentSparkReporter
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/test-output/ExtentReport.html");
-        sparkReporter.config().setDocumentTitle("Munchies App Automation Tests Report");
+        sparkReporter.config().setDocumentTitle("Food Runner App Automation Tests Report");
         sparkReporter.config().setReportName("Automation Tests Report");
 
         extent = new ExtentReports();
@@ -47,13 +43,14 @@ public class MainScreenTests extends LocatorLoader {
         swipeUtils = new SwipeUtils(driver);  // Initialize SwipeUtils with driver
     }
 
+    //In this test, We verify that App is opened. And unfiltered list of restaurants are shown.
     @Test
-    public void testHomePageIsDisplayedWithUnfilteredListOfRestaurants() {
-        test = extent.createTest("testHomePageIsDisplayed", "Verify that the Home Page is displayed");
+    public void testMainScreenIsDisplayedWithUnfilteredListOfRestaurants() {
+        test = extent.createTest("testMainScreenIsDisplayed", "Verify that the Main Screen is displayed");
         try {
-            test.log(Status.INFO, "Verifying if HomePage is displayed");
-            Assert.assertTrue(mainScreen.isHomePageDisplayed(), "Home Page should be visible.");
-            test.log(Status.PASS, "HomePage is displayed successfully");
+            test.log(Status.INFO, "Verifying if Main Screen is displayed");
+            Assert.assertTrue(mainScreen.isMainScreenDisplayed());
+            test.log(Status.PASS, "Main Screen is displayed successfully");
             Assert.assertTrue(mainScreen.isWayneChadBroskiBurgerRestauarantIsDisplayed());
             Assert.assertTrue(mainScreen.isYumasCandyShopIsDisplayed());
             Assert.assertTrue(mainScreen.isEmiliasFancyFoodIsDisplayed());
@@ -66,7 +63,7 @@ public class MainScreenTests extends LocatorLoader {
             Assert.assertTrue(mainScreen.isDoortjeBedAndBreakfastIsDisplayed());
             test.log(Status.INFO, "Last 3 restaurants are displayed in the list");
         } catch (AssertionError e) {
-            test.log(Status.FAIL, "HomePage is not displayed");
+            test.log(Status.FAIL, "Main Screen is not displayed");
         }
     }
 
@@ -74,9 +71,9 @@ public class MainScreenTests extends LocatorLoader {
     public void testApplyFastFoodFilter() {
         test = extent.createTest("testApplyFastFoodFilter", "Verify that Fast Food filter can be applied");
         try {
-            test.log(Status.INFO, "Verifying if HomePage is displayed");
-            Assert.assertTrue(mainScreen.isHomePageDisplayed(), "Home page should be visible.");
-            test.log(Status.PASS, "HomePage is displayed successfully");
+            test.log(Status.INFO, "Verifying if Main Screen is displayed");
+            Assert.assertTrue(mainScreen.isMainScreenDisplayed());
+            test.log(Status.PASS, "Main Screen is displayed successfully");
             test.log(Status.INFO, "Applying Fast Food filter");
             mainScreen.applyFastFoodFilter();
             test.log(Status.INFO, "Fast Food filter applied successfully");
@@ -91,9 +88,9 @@ public class MainScreenTests extends LocatorLoader {
     public void testApplyTopRatedFilterAndVerifyResults() {
         test = extent.createTest("testApplyTopRatedFilter", "Verify that the Top Rated filter can be applied and results are correct");
         try {
-            test.log(Status.INFO, "Verifying if HomePage is displayed");
-            Assert.assertTrue(mainScreen.isHomePageDisplayed());
-            test.log(Status.PASS, "HomePage is displayed successfully");
+            test.log(Status.INFO, "Verifying if Main Screen is displayed");
+            Assert.assertTrue(mainScreen.isMainScreenDisplayed());
+            test.log(Status.PASS, "Main Screen is displayed successfully");
 
             test.log(Status.INFO, "Applying Top Rated filter");
             mainScreen.applyTopRatedFilter();
@@ -125,12 +122,12 @@ public class MainScreenTests extends LocatorLoader {
     }
 
     @Test
-    public void applyMultipleFiltersAndCheckState() {
+    public void testApplyMultipleFiltersAndCheckState() {
         test = extent.createTest("applyMultipleFiltersAndCheckState", "Verify the state of filters when multiple filters are applied");
         try {
-            test.log(Status.INFO, "Verifying if HomePage is displayed");
-            Assert.assertTrue(mainScreen.isHomePageDisplayed());
-            test.log(Status.PASS, "Home page is displayed successfully");
+            test.log(Status.INFO, "Verifying if Main Screen is displayed");
+            Assert.assertTrue(mainScreen.isMainScreenDisplayed());
+            test.log(Status.PASS, "Main Screen is displayed successfully");
 
             boolean expectedStateOfFilter = true;
             test.log(Status.INFO, "Applying Fast Food filter");
@@ -150,14 +147,17 @@ public class MainScreenTests extends LocatorLoader {
         }
     }
 
-    //In this test, First check restaurant list is displayed without applying filter. Then Apply Filter and verify that the list of restaurant is updated. And then De-select filter by clicking on it again and see the list is updated.
+    // This test first verifies that the restaurant list is displayed without any filters applied.
+// Then, it applies a filter and checks if the restaurant list is updated accordingly.
+// Finally, the filter is deselected to ensure the list updates again after removing the filter.
+
     @Test
-    public void verifyFilterIsDeselected() throws InterruptedException {
+    public void testVerifyFilterIsDeselected() throws InterruptedException {
         test = extent.createTest("verifyFilterIsDeselected", "Verify that the filters can be deselected correctly");
         try {
-            test.log(Status.INFO, "Verifying if HomePage is displayed");
-            Assert.assertTrue(mainScreen.isHomePageDisplayed());
-            test.log(Status.PASS, "Home page is displayed successfully");
+            test.log(Status.INFO, "Verifying if Main Screen is displayed");
+            Assert.assertTrue(mainScreen.isMainScreenDisplayed());
+            test.log(Status.PASS, "Main Screen is displayed successfully");
 
             test.log(Status.INFO, "Checking if initial restaurants are displayed");
             Assert.assertTrue(mainScreen.isWayneChadBroskiBurgerRestauarantIsDisplayed());
@@ -196,6 +196,42 @@ public class MainScreenTests extends LocatorLoader {
         }
     }
 
+
+    @Test
+    public void testEstimateDeliveryTimeIsShownOnRestaurantCard() {
+        test = extent.createTest("testEstimateDeliveryTimeIsShownOnRestaurantCard", "Verify that estimated delivery time is shown on restaurant card");
+
+        try {
+            test.log(Status.INFO, "Verifying if the estimated delivery time is displayed");
+            boolean isEstimateTimeDisplayed = mainScreen.verifyEstimateDeliveryTimeIsShownOnRestaurantCard();
+            Assert.assertTrue(isEstimateTimeDisplayed);
+            test.log(Status.PASS, "Estimated delivery time is displayed successfully on the restaurant card");
+        } catch (AssertionError e) {
+            test.log(Status.FAIL, "Test failed due to assertion error: " + e.getMessage());
+            throw e;  // Rethrow to ensure the test fails correctly
+        } catch (Exception e) {
+            test.log(Status.FAIL, "Test encountered an error: " + e.getMessage());
+            throw e;  // Rethrow to ensure the test fails correctly
+        }
+    }
+
+    @Test
+    public void testStarRatingIsShownOnRestaurantCard() {
+        test = extent.createTest("testStarRatingIsShownOnRestaurantCard", "Verify that star ratings are shown on restaurant card");
+
+        try {
+            test.log(Status.INFO, "Verifying if the star rating is displayed");
+            boolean isStarRatingDisplayed = mainScreen.verifyStarRatingIsShownOnRestaurantCard();
+            Assert.assertTrue(isStarRatingDisplayed);
+            test.log(Status.PASS, "Star Ratings are displayed on the restaurant card");
+        } catch (AssertionError e) {
+            test.log(Status.FAIL, "Test failed due to assertion error: " + e.getMessage());
+            throw e;  // Rethrow to ensure the test fails correctly
+        } catch (Exception e) {
+            test.log(Status.FAIL, "Test encountered an error: " + e.getMessage());
+            throw e;  // Rethrow to ensure the test fails correctly
+        }
+    }
 
     @AfterMethod
     public void tearDown() {

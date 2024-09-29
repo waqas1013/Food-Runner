@@ -4,11 +4,13 @@
         <classes>
             <class name="tests.MainScreenTests">
                 <methods>
-                    <include name="testHomePageIsDisplayedWithUnfilteredListOfRestaurants"/>
+                    <include name="testMainScreenIsDisplayedWithUnfilteredListOfRestaurants"/>
                     <include name="testApplyFastFoodFilter"/>
-                    <include name="testApplyTopRatedFilter"/>
-                    <include name="applyMultipleFiltersAndCheckState"/>
-                    <include name="verifyFilterIsDeselected"/>
+                    <include name="testApplyTopRatedFilterAndVerifyResults"/>
+                    <include name="testApplyMultipleFiltersAndCheckState"/>
+                    <include name="testVerifyFilterIsDeselected"/>
+                    <include name="testEstimateDeliveryTimeIsShownOnRestaurantCard"/>
+                    <include name="testStarRatingIsShownOnRestaurantCard"/>
                 </methods>
             </class>
         </classes>

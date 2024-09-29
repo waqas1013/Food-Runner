@@ -62,7 +62,7 @@ Before you start, ensure you have the following installed on your system:
     - Clone the project from GitHub or download it as a ZIP file.
 
 2. **Android and iOS Setup**
-    - You can use the Android APK provided in the project named **FoodRunner**. For iOS, build the project from the code I shared in the email. Run the app on the simulator to execute tests.
+    - You can use the Android APK provided in the project named **FoodRunner**. For iOS, build the project using the code I shared in the email, which includes the test IDs I have integrated. After building the project, run the app on the simulator to execute the tests.
 
 ## Execution of Tests
 

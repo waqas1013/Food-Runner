@@ -13,7 +13,6 @@ public class MainScreen extends LocatorLoader {
     private final WaitUtils waitUtils;
     String platformName = System.getProperty("platform");
 
-
     // Constructor to initialize the driver and page elements
     public MainScreen(AppiumDriver driver) {
         this.appiumDriver = driver;
@@ -23,8 +22,8 @@ public class MainScreen extends LocatorLoader {
         }
     }
 
-    // Method to check if the home page is visible
-    public boolean isHomePageDisplayed() {
+    // Method to check if the Main Screen is visible, when the App is opened
+    public boolean isMainScreenDisplayed() {
         WebElement mainScreen;
         if (platformName.equalsIgnoreCase("Android")) {
             mainScreen = appiumDriver.findElement(By.xpath(properties.getProperty("mainScreen")));
@@ -36,7 +35,10 @@ public class MainScreen extends LocatorLoader {
     }
 
 
-    // Method to click on the "Fast Food" filter. Also checking the state if its clicked. iOS filter state always returns true. Test still passes for iOS because the state is returned as true always, to make it fail, if you change the assertion to false, then the test will fail, because we will expect false but it will return true.
+    // Method to click the "Fast Food" filter and verify its state. On iOS, the filter state always returns true.
+// The test passes for iOS since the state is always true.
+// To make the test fail on iOS, change the assertion to expect false. This will fail because the actual state remains true.
+
     public void applyFastFoodFilter() {
         WebElement fastFoodFilter;
         if (platformName.equalsIgnoreCase("Android")) {
@@ -83,7 +85,9 @@ public class MainScreen extends LocatorLoader {
         }
     }
 
-    //In Multiple Filters testing, we test 2 filters applied together, in this case, Fast Food filter & Top Rated filters are applied. And checking state of filter that its applied.
+    // In Multiple Filters testing, two filters ("Fast Food" and "Top Rated") are applied together.
+// The test verifies that both filters are applied correctly by checking their state.
+
     public boolean areMultipleFiltersSelected() {
         WebElement fastFoodFilter;
         WebElement topRatedFilter;
@@ -251,14 +255,30 @@ public class MainScreen extends LocatorLoader {
         try {
             WebElement estimateDeliveryTime;
             if (platformName.equalsIgnoreCase("Android")) {
-                estimateDeliveryTime = appiumDriver.findElement(By.xpath(properties.getProperty("doortjeBed&Breakfast")));
+                estimateDeliveryTime = appiumDriver.findElement(By.xpath(properties.getProperty("estimatedDeliveryTime")));
             } else {
-                estimateDeliveryTime = appiumDriver.findElement(By.id(properties.getProperty("doortjeBed&Breakfast")));
+                estimateDeliveryTime = appiumDriver.findElement(By.id(properties.getProperty("estimatedDeliveryTime")));
             }
             return estimateDeliveryTime.isDisplayed();
         } catch (NoSuchElementException e) {
-            // If the element is not found, return false instead of throwing an exception
+            // If the element is not found, return false
             return false;
         }
     }
+
+    public boolean verifyStarRatingIsShownOnRestaurantCard() {
+        try {
+            WebElement starRating;
+            if (platformName.equalsIgnoreCase("Android")) {
+                starRating = appiumDriver.findElement(By.xpath(properties.getProperty("starRating")));
+            } else {
+                starRating = appiumDriver.findElement(By.id(properties.getProperty("starRating")));
+            }
+            return starRating.isDisplayed();
+        } catch (NoSuchElementException e) {
+            // If the element is not found, return false
+            return false;
+        }
+    }
+
 }
