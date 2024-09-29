@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TestSuite">
+    <test name="HomePageTest">
+        <classes>
+            <class name="tests.MainScreenTests">
+                <methods>
+                    <include name="testHomePageIsDisplayedWithUnfilteredListOfRestaurants"/>
+                    <include name="testApplyFastFoodFilter"/>
+                    <include name="testApplyTopRatedFilter"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
