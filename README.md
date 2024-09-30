@@ -29,8 +29,8 @@ Before you start, ensure you have the following installed on your system:
       ```
 
 2. **Maven**
-    - Download and install Maven from (https://maven.apache.org/download.cgi).
-    - Set `M2_HOME` and `JAVA_HOME` in your `~/.bash_profile`.
+    - Download and install Maven.
+    - Set `M2_HOME` and `JAVA_HOME` in your `~/.bash_profile` or `~/.zshrc`.
 
 3. **Appium**
     - Ensure that `npm` (Node Package Manager) is installed on your system. Verify it by running:
