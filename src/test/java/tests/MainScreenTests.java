@@ -185,7 +185,7 @@ public class MainScreenTests extends LocatorLoader {
             mainScreen.applyFastFoodFilter();
             test.log(Status.INFO, "Fast food filter de-selected. And list of restaurants should be updated");
             Assert.assertTrue(mainScreen.isYumasCandyShopIsDisplayed());
-            test.log(Status.PASS, "Yuma's Candy Shop is displayed after applying the Fast Food filter.");
+            test.log(Status.PASS, "Yuma's Candy Shop is displayed after de-selecting the Fast Food filter.");
 
         } catch (AssertionError e) {
             test.log(Status.FAIL, "Test failed due to assertion error: " + e.getMessage());

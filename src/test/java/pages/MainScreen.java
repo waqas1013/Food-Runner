@@ -130,10 +130,11 @@ public class MainScreen extends LocatorLoader {
             if (platformName.equalsIgnoreCase("Android")) {
                 wayneChadBroskiBurgerRestaurant = appiumDriver.findElement(By.xpath(properties.getProperty("wayneChadBroskiBurgerRestaurant")));
             } else {
-                wayneChadBroskiBurgerRestaurant = appiumDriver.findElement(By.id(properties.getProperty("firstRestaurantInTheList")));
+                wayneChadBroskiBurgerRestaurant = appiumDriver.findElement(By.id(properties.getProperty("wayneChadBroskiBurgerRestaurant")));
             }
             return wayneChadBroskiBurgerRestaurant.isDisplayed();
         } catch (NoSuchElementException e) {
+            // If the element is not found, return false
             return false;
         }
     }
@@ -148,6 +149,7 @@ public class MainScreen extends LocatorLoader {
             }
             return yumasCandyShop.isDisplayed();
         } catch (NoSuchElementException e) {
+            // If the element is not found, return false
             return false;
         }
     }
@@ -162,6 +164,7 @@ public class MainScreen extends LocatorLoader {
             }
             return emiliasFancyFood.isDisplayed();
         } catch (NoSuchElementException e) {
+            // If the element is not found, return false
             return false;
         }
     }
@@ -176,6 +179,7 @@ public class MainScreen extends LocatorLoader {
             }
             return pizzeriaVarshaRestaurant.isDisplayed();
         } catch (NoSuchElementException e) {
+            // If the element is not found, return false
             return false;
         }
     }
@@ -190,6 +194,7 @@ public class MainScreen extends LocatorLoader {
             }
             return guillaumeCroissants.isDisplayed();
         } catch (NoSuchElementException e) {
+            // If the element is not found, return false
             return false;
         }
     }
@@ -204,6 +209,7 @@ public class MainScreen extends LocatorLoader {
             }
             return martinsMancave.isDisplayed();
         } catch (NoSuchElementException e) {
+            // If the element is not found, return false
             return false;
         }
     }
@@ -218,6 +224,7 @@ public class MainScreen extends LocatorLoader {
             }
             return henriksMuddyRestaurant.isDisplayed();
         } catch (NoSuchElementException e) {
+            // If the element is not found, return false
             return false;
         }
     }
@@ -232,6 +239,7 @@ public class MainScreen extends LocatorLoader {
             }
             return pontusExpiredYogurt.isDisplayed();
         } catch (NoSuchElementException e) {
+            // If the element is not found, return false
             return false;
         }
     }
@@ -246,7 +254,7 @@ public class MainScreen extends LocatorLoader {
             }
             return doortjeBedAndBreakfast.isDisplayed();
         } catch (NoSuchElementException e) {
-            // If the element is not found, return false instead of throwing an exception
+            // If the element is not found, return false
             return false;
         }
     }

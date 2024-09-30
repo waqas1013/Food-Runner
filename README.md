@@ -5,8 +5,8 @@
 The Screen Object Model (SOM) is a powerful design pattern widely utilized in test automation, particularly in Mobile UI Automation. This framework significantly enhances test maintenance and reduces code duplication. In this framework, tests leverage the screen object class methods to interact with the UI of the application.
 
 ### Key Benefits
-- **Maintainability:** When the UI of a page changes, only the code within the screen object needs to be updated, not the tests themselves.
-- **Separation of Concerns:** Locators and test scripts are stored separately, allowing for a cleaner architecture and easier updates.
+- **Easier Maintenance::** When the UI of a page changes, only the code within the screen object needs to be updated, not the tests themselves.
+- **Clear Structure:** Locators and test scripts are stored separately, allowing for a cleaner architecture and easier updates.
 
 ## Tools and Technologies Used
 
@@ -59,7 +59,7 @@ Before you start, ensure you have the following installed on your system:
 ## Project Setup
 
 1. **Clone the Project**
-    - Clone the project from GitHub or download it as a ZIP file.
+    - Clone the project from GitHub https://github.com/waqas1013/Food-Runner
 
 2. **Android and iOS Setup**
     - You can use the Android APK provided in the project named **FoodRunner**. For iOS, build the project using the code I shared in the email, which includes the test IDs I have integrated. After building the project, run the app on the simulator to execute the tests.

@@ -22,7 +22,7 @@ public class DefaultDriver {
 
     public AppiumDriver setUp() throws InterruptedException {
 
-        if (platformName == null){
+        if (platformName == null) {
             platformName = "iOS";
         }
 

@@ -3,7 +3,7 @@ package utility;
 import java.io.InputStream;
 
 public class FileHandlingUtility {
-    public InputStream getFileFromResources(String fileName) throws IllegalArgumentException{
+    public InputStream getFileFromResources(String fileName) throws IllegalArgumentException {
 
         ClassLoader classLoader = getClass().getClassLoader();
 
